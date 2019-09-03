@@ -1,3 +1,5 @@
+resources/application.properties
+
 ##########################
 ## Java
 ##########################
@@ -17,8 +19,6 @@ pom.xml.releaseBackup
 pom.xml.versionsBackup
 pom.xml.next
 release.properties
-resources/
-application.properties
 
 ##########################
 ## IntelliJ
@@ -61,9 +61,3 @@ nb-configuration.xml
 ## OS X
 ##########################
 .DS_Store
-!/src/main/resources/application.properties
-data/
-pom.xml
-src/main/java/
-src/main/resources/application.properties
-src/test/
