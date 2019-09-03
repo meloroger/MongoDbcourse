@@ -51,7 +51,7 @@ public class UserPreferencesTest extends TicketTest {
   @Test
   public void testUpdateSinglePreferences() {
 
-    String expected = "FC Porto";
+    String expected = "FC Portugal";
     String key = "favorite_club";
     HashMap<String, String> userPrefs = new HashMap<>();
     userPrefs.put(key, expected);
