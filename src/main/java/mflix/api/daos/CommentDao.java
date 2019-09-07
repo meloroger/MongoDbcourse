@@ -5,10 +5,7 @@ import com.mongodb.MongoWriteException;
 import com.mongodb.ReadConcern;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.Aggregates;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Sorts;
-import com.mongodb.client.model.Updates;
+import com.mongodb.client.model.*;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 import mflix.api.models.Comment;
@@ -78,13 +75,17 @@ public class CommentDao extends AbstractMFlixDao {
    * @throw IncorrectDaoOperation if the insert fails, otherwise
    * returns the resulting Comment object.
    */
-  public Comment addComment(Comment comment) {
+  public Comment addComment(Comment comment) throws IncorrectDaoOperation{
+    if(comment.getId() == null) {
+      throw new IncorrectDaoOperation("Comment cannot be null.");
+    }
+    commentCollection.insertOne(comment);
 
     // TODO> Ticket - Update User reviews: implement the functionality that enables adding a new
     // comment.
     // TODO> Ticket - Handling Errors: Implement a try catch block to
     // handle a potential write exception when given a wrong commentId.
-    return null;
+    return comment;
   }
 
   /**
@@ -101,6 +102,19 @@ public class CommentDao extends AbstractMFlixDao {
    * @return true if successfully updates the comment text.
    */
   public boolean updateComment(String commentId, String text, String email) {
+    Comment comment = getComment(commentId);
+    String commentEmail = comment.getEmail();
+
+    if (commentEmail.equals(email)) {
+      comment.setText(text);
+      comment.setEmail(email);
+
+      Bson queryFilter = new Document("_id", commentId);
+
+      Bson newValue = new Document("text", text);
+      commentCollection.updateOne(queryFilter, new Document("$set", newValue));
+      return true;
+    }
 
     // TODO> Ticket - Update User reviews: implement the functionality that enables updating an
     // user own comments

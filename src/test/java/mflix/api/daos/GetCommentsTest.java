@@ -75,7 +75,7 @@ public class GetCommentsTest extends TicketTest {
     Assert.assertEquals(
         "Expected `name` field does match: check your " + "getMovie() comments sort order.",
         expectedName,
-        commentDocs.get(1).getString("name"));
+        commentDocs.get(8).getString("name"));
   }
 
   @Test

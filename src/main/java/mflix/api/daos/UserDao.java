@@ -84,7 +84,6 @@ public class UserDao extends AbstractMFlixDao {
       newSession.setUserId(userId);
       newSession.setJwt(jwt);
 
-      System.out.println(newSession.getUserId());
 
       //sessionsCollection.insertOne(newSession);
       //return true;
@@ -185,7 +184,7 @@ public class UserDao extends AbstractMFlixDao {
         return true;
      }
 
-    //TODO> Ticket: User Preferences - implement the method that allows for user preferences to
+    // User Preferences - implement the method that allows for user preferences to
     // be updated.
     //TODO > Ticket: Handling Errors - make this method more robust by
     // handling potential exceptions when updating an entry.

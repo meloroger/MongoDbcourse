@@ -82,6 +82,7 @@ public class UpdateCreateCommentTest extends TicketTest {
   public void testUserUpdatesOwnComments() {
     Comment fakeComment = fakeCommentWithId();
     dao.addComment(fakeComment);
+    System.out.println(fakeComment.getEmail());
     String expectedCommentText = randomText(20);
 
     Assert.assertTrue(
